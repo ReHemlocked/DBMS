@@ -9,10 +9,12 @@ const divStyle={
     height:"90%",
     borderRadius: "20px",
     boxShadow:"10px 10px 10px 10px rgba(1,1,1,0.5)",
-    marginTop:"10%"
+    marginTop:"10%",
+    textAlign:"center"
 }
 
 const inpStyle={
+    // try to use percentages like this as much as possible, so that UI is consistent across our systems
     width:"60%",
     height:"30px",
     borderRadius:"5px",
@@ -107,7 +109,8 @@ export function Auth(){
         width:"50%",
         height:"30px",
         cursor:"pointer",
-        borderRadius:"5px"
+        borderRadius:"5px",
+        textAlign:"center"
     }
 
     return(
