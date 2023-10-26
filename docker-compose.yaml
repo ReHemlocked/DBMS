@@ -1,0 +1,26 @@
+version: '3.7' # of docker-compose
+
+services:
+  backend:
+    build: 
+      context: ./backend 
+      dockerfile: Dockerfile
+    command: flask --debug run --host=0.0.0.0 --port=5000
+    volumes:
+      - ./backend:/code  #all code in backend folder in host and code folder in the container will be synced.
+    ports:
+      - "5000:5000" #exposes the container at port 5000 in host
+    depends_on: 
+      - db 
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: "social"
+      POSTGRES_USER: "social"
+      POSTGRES_PASSWORD: "social"
+    volumes:
+     - ./database:/var/lib/postgresql/data
+    ports:
+     - "5432:5432"
+
+    
