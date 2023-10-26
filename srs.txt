@@ -1,0 +1,36 @@
+User Registration and Authentication:
+
+Description: Provides user registration and authentication functionality.
+Functional Requirements: Allows users to sign up with a unique username, email, and secure password. Validates and stores user information securely, checking for duplicate usernames and emails. Implements email verification and password reset mechanisms.
+User Login:
+
+Description: Authenticates users to access the platform.
+Functional Requirements: Validates user credentials (email and password) against registered users to ensure secure login.
+User Profile Management:
+
+Description: Allows users to create and customize their profiles.
+Functional Requirements: Enables users to fill out profile information, including name, bio, picture, gender, and mobile number. Provides an option to set profiles as public or private. Tracks the number of connections (friends) a user has.
+Friendship Management:
+
+Description: Enables users to connect with others.
+Functional Requirements: Allows users to send and receive friend requests. The recipient can accept or decline friend requests, with the status field tracking the request's status. Users can chat with friends only if the friend request is accepted.
+Post Creation and Management:
+
+Description: Allows users to create and manage posts.
+Functional Requirements: Enables users to create posts with captions, pictures/videos, source links, and optional music. Supports likes, comments, and editing of posts. Posts are visible only to a user's friends.
+Commenting on Posts:
+
+Description: Enables users to comment on posts.
+Functional Requirements: Allows users to add comments to posts, including text, likes, and timestamps. Users can also like comments on posts.
+Story Sharing:
+
+Description: Allows users to share temporary stories.
+Functional Requirements: Enables users to post stories with pictures/videos, optional music, likes, and timestamps. Stories automatically expire after 24 hours.
+Real-Time Messaging:
+
+Description: Facilitates real-time messaging between users and groups.
+Functional Requirements: Allows users to send messages to friends or groups, with content, timestamps, and group IDs where applicable. Supports both individual and group messaging.
+Group Interaction:
+
+Description: Enables users to join and participate in groups.
+Functional Requirements: Allows users to join groups through invitations or accepted requests. Manages group memberships, requests, and invitations.
