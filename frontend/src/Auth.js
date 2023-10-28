@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import axios, { Axios } from "axios";
+// import { useHistory } from 'react-router-dom';
 
 const divStyle={
     margin: "0 auto",
@@ -43,7 +44,20 @@ function SignUp(){
     const handleSubmit=(e)=>{
         e.preventDefault()
         console.log(userInfo)
-        axios.post("http://localhost:8000/Auths/SignUp",userInfo).then((res)=>{console.log(res)})
+        axios.post("http://localhost:8000/auths/signup/",userInfo)
+        .then((res)=>{console.log(res)})
+        .catch((err)=>{
+            const errMsg=(err.response.data)
+            if(errMsg.password){
+                alert("ERROR in the password field , "+errMsg.password)
+            }
+            else if(errMsg.username){
+                alert("ERROR in the username field , "+errMsg.username)
+            }
+            else{
+                alert("ERROR in the email field , "+errMsg.email)
+            }
+        })
         // django endpoint that can receive post requests will be created at the url specified
     }
 
@@ -69,6 +83,7 @@ function Login(){
         password:""
     })
     const [isHovered, setIsHovered] = useState(false);
+    // const history=useHistory();
 
     const handleChange=(e)=>{
         const {name,value}=e.target
@@ -80,7 +95,15 @@ function Login(){
     const handleSubmit=(e)=>{
         e.preventDefault()
         console.log(userInfo)
-        axios.post("http://localhost:8000/Auths/LogIn",userInfo).then((res)=>{console.log(res)})
+        axios.post("http://localhost:8000/auths/login/",userInfo)
+        .then((res)=>{
+            console.log(res)
+            alert(res.data.message)
+        })
+        .catch((err)=>{
+            const errMsg=err.response.data
+            alert(errMsg.error+". Try changing the email or password field")
+        })
     }
 
     const handleHover=()=>{
