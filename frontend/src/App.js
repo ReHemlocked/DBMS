@@ -6,6 +6,7 @@ import './App.css';
 import { SideBar } from './SideBar';
 import { BrowserRouter, Routes, Route,Navigate } from "react-router-dom";
 import { Create } from './Create';
+import { GetStories } from './Stories';
 
 
 function App() {
@@ -13,8 +14,9 @@ function App() {
     <BrowserRouter>
       <Routes>
           <Route path='/' element={<Auth/>}></Route>
-          <Route path='home' element={<Home/>}></Route>
-          <Route path='create' element={<Create/>}></Route>
+          <Route path='/home' element={<Home/>}></Route>
+          <Route path='/create' element={<Create/>}></Route>
+          <Route path='/stories' element={<GetStories/>}></Route>
       </Routes>
     </BrowserRouter>
   );

@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { SideBar } from "./SideBar";
+import { Link } from "react-router-dom";
 
 
 const username="LuckyBird"
@@ -40,7 +41,7 @@ export function Home(){
 
     const divStyle={
         display:"grid",
-        gridTemplateColumns:"5% 10% 75% 10%"
+        gridTemplateColumns:"5% 10% 75% 10%",
       }
     
       const containerStyle={
@@ -60,7 +61,9 @@ export function Home(){
     
     const storyDiv=stories.map((ele,pos)=>{
         return <div key={pos} style={storyDivStyle}>
-            <img src={ele.profile_pic} style={imgStyle}></img>
+            <Link to={'/stories'}>
+                <img src={ele.profile_pic} style={imgStyle}></img>
+            </Link>
             <p><em><b>{ele.friend.slice(0,11)}</b></em></p>
         </div>
     })

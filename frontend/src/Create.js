@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
+import { Link } from "react-router-dom";
 
 const fileTypes = ["JPG", "PNG", "GIF"];
 
@@ -18,7 +19,7 @@ export function Create() {
         borderRadius: "20px",
         boxShadow:"10px 10px 10px 10px rgba(1,1,1,0.5)",
         marginTop:"5%",
-        textAlign:"center",
+        // textAlign:"center",
     }
 
     const txtAreaStyle={
@@ -38,7 +39,7 @@ export function Create() {
         height:"500px",
         display:"grid",
         gridTemplateColumns:"50% 50%",
-        // borderRadius:"20px",
+        marginTop:"4%",
         boxShadow:"10px 10px 10px 10px rgba(1,1,1,0.5)",
     }
 
@@ -62,6 +63,9 @@ export function Create() {
         e.preventDefault()
         setDisp(false)
         setFile(null)
+        console.log("here")
+        setCaption("Enter Caption")
+        window.location.reload(false)
     }
 
     const handleChange=(e)=>{
@@ -78,7 +82,7 @@ export function Create() {
     const handleClick=(e)=>{
         e.preventDefault()
         setDisp(false)
-        console.log(caption)
+        // console.log(caption)
     }
 
 
@@ -107,8 +111,10 @@ export function Create() {
                                 {file?<span>Uploaded {file.name}</span>:<></>}
                             </div>
                             <textarea style={txtAreaStyle} onChange={handleChange}>{caption}</textarea>
-                            <div>
-                                <button style={buttonStyle} onClick={handleCancel}>Cancel</button>
+                            <div style={{textAlign:"center"}}>
+                                <Link to="/home">
+                                    <button style={buttonStyle} >Cancel</button>
+                                </Link>
                                 <button style={buttonStyle} onClick={handlePreview}>Preview</button>
                                 <button type="submit" style={buttonStyle}>Create</button>
                             </div>
