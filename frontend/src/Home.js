@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { SideBar } from "./SideBar";
 import { Link } from "react-router-dom";
+import { Tab } from "bootstrap";
 
 
 const username="LuckyBird"
@@ -42,6 +43,8 @@ function GetStories(){
 }
 
 function PostStyle(props){
+    const [hover,setHover]=useState(false)
+    const [hover1,setHover1]=useState(false)
     const [showComment,setShowComments]=useState(false)
     const divStyle={
         borderRadius:"5px",
@@ -106,7 +109,10 @@ function PostStyle(props){
                         <div style={{textAlign:"center",border:"1px solid black"}}>
                             <form onSubmit={handleNewComment}>
                                 <input placeholder="Enter Comment" style={inpStyle}></input><br></br>
-                                <button style={buttonStyle}>Go back to Post</button>
+                                <button style={buttonStyle} onClick={(e)=>{
+                                    e.preventDefault()
+                                    setShowComments(false)
+                                }}>Go back to Post</button>
                                 <button style={buttonStyle} type="submit">Add Comment</button>
                             </form>
                             
@@ -115,16 +121,21 @@ function PostStyle(props){
                 </div>
                 :
                 <div style={divStyle}>
-                    <div style={commonDiv}><b><em>{props.friend}</em></b></div>
+                    <div style={commonDiv}>
+                        <b><em>{props.friend} </em></b>
+                    </div>
                     <div>
                         <img src={props.url} style={{width:"100%",height:"100%"}}></img>
                     </div>
                     <div style={{...commonDiv,overflowY:"scroll"}}>
+                        <b><em>LIKES : {props.likes}</em></b>
                         <p>{props.caption}</p>
                     </div>
                     <div style={{display:"grid",gridTemplateColumns:"50% 50%",textAlign:"center",fontSize:"20px",}}>
-                        <div onClick={handleLikes}    style={{border:"1px solid black"}}><p>Likes : {props.likes}</p></div>
-                        <div onClick={handleComments} style={{border:"1px solid black"}}><p>Comments</p></div>
+                        <div onClick={handleLikes}    style={{border:"1px solid black",backgroundColor:hover?"#F5F5FF":"white"}} 
+                        onMouseOver={()=>{setHover(true)}} onMouseLeave={()=>{setHover(false)}}><p>Likes++</p></div>
+                        <div onClick={handleComments} style={{border:"1px solid black",backgroundColor:hover1?"#F5F5FF":"white"}} 
+                        onMouseOver={()=>{setHover1(true)}} onMouseLeave={()=>{setHover1(false)}}><p>Comments</p></div>
                     </div>
                 </div>
                 

@@ -4,6 +4,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import SignUpModel,LogInModel
 from .serializer import SignUpSerializer,LogInSerializer
+from django.contrib.auth.hashers import make_password,check_password
+from django.shortcuts import redirect
+
 # Create your views here.
 
 # handles the signup component of the webiste
@@ -31,6 +34,8 @@ class SignUp(ListCreateAPIView):
             res={"error":"ensure password field has no more than 30 charecters"}
             return Response(res,status=status.HTTP_400_BAD_REQUEST)
         
+        hashed_password=make_password(password)
+        serializer.validated_data['password']=hashed_password
         serializer.save() # if no errors the user has registered successfully
 
 
@@ -51,11 +56,14 @@ class LogIn(CreateAPIView):
 
         # checks if the email,password field exists in the signup table, if yes returns status 200 else status 400
         try:
-            user=SignUpModel.objects.get(email=email,password=password)
+            user=SignUpModel.objects.get(email=email)
         except SignUpModel.DoesNotExist:
-            res={"error":"User does not exist"}
+            res={"error":"User with that email does not exist"}
             return Response(res,status=status.HTTP_400_BAD_REQUEST)
         
-        return Response({"message":"Logged in Successfully"},status=status.HTTP_200_OK)
-
+        if(check_password(password,user.password)):
+            return Response({"Success":"Logged in successfully"},status.HTTP_200_OK)
+            # return redirect("home")
+        else:
+            return Response({"error":"wrong password"},status.HTTP_400_BAD_REQUEST)
 

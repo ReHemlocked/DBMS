@@ -28,7 +28,8 @@ function SideBarComponent(props){
         marginTop:"20%",
         marginBottom:"10%",
         marginLeft:"20%",
-        overflow: "hidden"
+        overflow: "hidden",
+        // position:"fixed"
     }
     
     return(

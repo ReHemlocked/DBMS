@@ -1,7 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import axios, { Axios } from "axios";
-// import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router';
+import { Link } from "react-router-dom";
+
 
 const divStyle={
     margin: "0 auto",
@@ -48,14 +50,19 @@ function SignUp(){
         .then((res)=>{console.log(res)})
         .catch((err)=>{
             const errMsg=(err.response.data)
+            console.log(errMsg)
             if(errMsg.password){
                 alert("ERROR in the password field , "+errMsg.password)
             }
             else if(errMsg.username){
                 alert("ERROR in the username field , "+errMsg.username)
             }
-            else{
+            else if(errMsg.email){
+                console.log(errMsg)
                 alert("ERROR in the email field , "+errMsg.email)
+            }
+            else{
+                alert("idk what went wrong")
             }
         })
         // django endpoint that can receive post requests will be created at the url specified
@@ -83,7 +90,9 @@ function Login(){
         password:""
     })
     const [isHovered, setIsHovered] = useState(false);
-    // const history=useHistory();
+    const [isLoggedIn,setLoggedIn]=useState(false);
+    const navigate = useNavigate();
+
 
     const handleChange=(e)=>{
         const {name,value}=e.target
@@ -91,18 +100,25 @@ function Login(){
             ...userInfo,[name]:value,
         },[])
     }
+    // var handleAlertEnter=(event)=>{
+    //     console.log("here")
+    //     window.removeEventListener('keypress', handleAlertEnter);
+    //     if(event.key==='enter'){
+    //         navigate("/home")
+    //     }
+    // }
 
     const handleSubmit=(e)=>{
         e.preventDefault()
-        console.log(userInfo)
+        // console.log(userInfo)
         axios.post("http://localhost:8000/auths/login/",userInfo)
         .then((res)=>{
-            console.log(res)
-            alert(res.data.message)
+            // window.addEventListener('keypress', handleAlertEnter);
+            alert(res.data.Success)
+            setLoggedIn(true)
         })
         .catch((err)=>{
-            const errMsg=err.response.data
-            alert(errMsg.error+". Try changing the email or password field")
+            alert(err.response.data.error+". Please try a different password")
         })
     }
 
@@ -112,13 +128,25 @@ function Login(){
 
     return(
         <div>
-            <h1>Log In</h1>
-            <form on onSubmit={handleSubmit}>
-                <input placeholder="E-mail" name="email" onChange={handleChange} style={inpStyle} type="email"></input><br></br>
-                <input placeholder="Password" name="password" onChange={handleChange} style={inpStyle} type="password"></input><br></br>
-                <button type="submit" style={{...buttonStyle}} onMouseOver={handleHover}>Log In</button>
-                {/* add shade to button if user hovers over it */}
-            </form>
+            {
+                !isLoggedIn?
+                <div>
+                    <h1>Log In</h1>
+                    <form on onSubmit={handleSubmit}>
+                        <input placeholder="E-mail" name="email" onChange={handleChange} style={inpStyle} type="email"></input><br></br>
+                        <input placeholder="Password" name="password" onChange={handleChange} style={inpStyle} type="password"></input><br></br>
+                        <button type="submit" style={{...buttonStyle}} onMouseOver={handleHover}>Log In</button>
+                        {/* add shade to button if user hovers over it */}
+                    </form>
+                </div>
+                :
+                <div>
+                    <p>Successfully Logged In. Continue to Home Page</p>
+                    <Link to="home">
+                        <button style={buttonStyle}>Go to home page</button>
+                    </Link>
+                </div>
+            }
         </div>
     )
 }
@@ -138,12 +166,14 @@ export function Auth(){
 
     return(
         <div style={divStyle}>
-            <div>
-                <div style={{...spanStyle,boxShadow:isSign?"1px 1px 1px 1px":""}} onClick={()=>{SetSign(true)}} >Sign Up</div>
-                <div style={{...spanStyle,boxShadow:isSign?"":"1px 1px 1px 1px"}} onClick={()=>{SetSign(false)}}>Log In</div>
-                {/* shadow is added based on whether user is registering or logging in */}
-            </div>
-            {isSign?<SignUp></SignUp>:<Login></Login>}
+                <div>
+                    <div>
+                        <div style={{...spanStyle,boxShadow:isSign?"1px 1px 1px 1px":""}} onClick={()=>{SetSign(true)}} >Sign Up</div>
+                        <div style={{...spanStyle,boxShadow:isSign?"":"1px 1px 1px 1px"}} onClick={()=>{SetSign(false)}}>Log In</div>
+                        {/* shadow is added based on whether user is registering or logging in */}
+                    </div>
+                    {isSign?<SignUp></SignUp>:<Login></Login>}
+                </div>
             {/* conditionally renders SignUp or LogIn function created above*/}
         </div>
     )
