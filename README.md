@@ -22,10 +22,6 @@ make sure to shut down containers each time, closing terminal doesnt shut them d
 
 for the first time 
 
-`docker-compose up -d --build`
-
-### frontend
-
 `cd frontend`
 
 `yarn install`
