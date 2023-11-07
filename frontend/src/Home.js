@@ -62,7 +62,7 @@ function PostStyle(props){
     }
 
     const commonDiv={
-        border:"2px solid black",
+        // border:"2px solid black",
         // borderRadius:"5px",
         fontSize:"20px",
         paddingLeft:"10px"
@@ -156,7 +156,7 @@ export function Home(){
 
     const divStyle={
         display:"grid",
-        gridTemplateColumns:"5% 17% 60% 18%",
+        gridTemplateColumns:"5% 15% 60% 20%",
       }
     
       const containerStyle={

@@ -14,6 +14,12 @@ const sideIcons=[
     {name:"Logout",image:require("./images/logout.png"),link:"/"},
 ]
 
+function expandSideBar(){
+    return(
+        <div></div>
+    )
+}
+
 function SideBarComponent(props){
     const [isHovered,setHovered]=useState(false)
     const handleHover=()=>{
@@ -33,10 +39,13 @@ function SideBarComponent(props){
     }
     
     return(
-        <div onMouseEnter={handleHover} onMouseLeave={handleLeave}>
+        <div onMouseEnter={handleHover} onMouseLeave={handleLeave} >
             <div style={{backgroundColor:isHovered?"#F5F5FF":"white"}}>
             <Link to={props.link} onClick={()=>{
-                if(props.link==='/') alert("Successfully logged out")
+                if(props.link==='/'){ 
+                    alert("Successfully logged out"+localStorage.getItem("user_id"))
+                    localStorage.clear()
+                }
             }}>
                 <img src={props.image} style={imgStyle}></img>
             </Link>

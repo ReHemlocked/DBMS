@@ -114,6 +114,7 @@ function Login(){
         axios.post("http://localhost:8000/auths/login/",userInfo)
         .then((res)=>{
             // window.addEventListener('keypress', handleAlertEnter);
+            localStorage.setItem("user_id",res.data.user_id)
             alert(res.data.Success)
             setLoggedIn(true)
         })
@@ -141,7 +142,7 @@ function Login(){
                 </div>
                 :
                 <div>
-                    <p>Successfully Logged In. Continue to Home Page</p>
+                    <p>Successfully Logged In</p>
                     <Link to="home">
                         <button style={buttonStyle}>Go to home page</button>
                     </Link>

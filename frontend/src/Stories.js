@@ -76,8 +76,8 @@ export function GetStories(){
                 {
                     <>
                         <div style={divStyle}>
-                            <img style={{  ...imgStyle,display:stories[i-1].imOrVid?"none":"block",filter:"blur(6px)"}} src={stories[i-1].url}></img>
-                            <video style={{...imgStyle,display:stories[i-1].imOrVid?"block":"none",filter:"blur(6px)"}} 
+                            <img style={{  ...imgStyle,display:stories[i-1].imOrVid?"none":"block",filter:"blur(5px)"}} src={stories[i-1].url}></img>
+                            <video style={{...imgStyle,display:stories[i-1].imOrVid?"block":"none",filter:"blur(5px)"}} 
                             src={stories[i-1].url} controls></video>
                         </div>
                         <div style={{...divStyle,position:"relative",zIndex:"5"}}>

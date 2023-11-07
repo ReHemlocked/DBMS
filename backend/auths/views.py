@@ -62,7 +62,7 @@ class LogIn(CreateAPIView):
             return Response(res,status=status.HTTP_400_BAD_REQUEST)
         
         if(check_password(password,user.password)):
-            return Response({"Success":"Logged in successfully"},status.HTTP_200_OK)
+            return Response({"Success":"Logged in successfully","user_id":user.user_id},status.HTTP_200_OK)
             # return redirect("home")
         else:
             return Response({"error":"wrong password"},status.HTTP_400_BAD_REQUEST)

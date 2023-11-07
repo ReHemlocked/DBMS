@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'auths.apps.AuthsConfig',
+    'friends.apps.FriendsConfig',
+
+    "daphne",
 ]
 
 MIDDLEWARE = [
@@ -73,6 +76,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'backend.wsgi.application'
+ASGI_APPLICATION = "backend.asgi.application"
 
 
 # Database
